@@ -1,4 +1,4 @@
 Final project for 
-Lydia Tan
-Yousol Bae
-Kevin Chang
+Lydia Tan,
+Yousol Bae,
+Kevin Chang,
