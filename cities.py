@@ -37,7 +37,7 @@ c.execute("SELECT COUNT(*) FROM cities")
 num_rows = c.fetchone()[0]
 
 while num_rows < 100:
-    cities = fetch_us_cities(25)
+    cities = fetch_us_cities(100)
 
     for city in cities:
         name = city['name']
@@ -48,7 +48,7 @@ while num_rows < 100:
                   (name, state, population))
         city_row_id = c.lastrowid
 
-    num_rows += 25
+    num_rows += 100
 
 c.execute('SELECT * FROM cities')
 rows = c.fetchall()
