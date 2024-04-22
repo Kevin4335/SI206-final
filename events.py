@@ -34,6 +34,15 @@ c.execute('''CREATE TABLE IF NOT EXISTS events
               event_genre TEXT,
               date TEXT)''')
 
+
+c.execute('''CREATE TABLE IF NOT EXISTS num_events
+             (city_id INTEGER PRIMARY KEY,
+              city_name TEXT,
+              state TEXT,
+              population TEXT,
+              num_events TEXT)''')
+
+
 for city_data in cities_data:
     city_id, city_name, state, population = city_data
     event_data = fetch_event(city_name,state)
@@ -59,12 +68,21 @@ for city_data in cities_data:
             event_name = "N/A"
             event_genre = "N/A"
             date = "N/A"
+            
+        if "totalElements" in event_data["page"]:
+            num_events = event_data["page"]["totalElements"]
+        else:
+            num_events = "0"
     else:
         event_name = "N/A"
         event_genre = "N/A"
         date = "N/A"
+        num_events = "0"
         
     c.execute("INSERT OR IGNORE INTO events (city_id, city_name,state,event_name,event_genre,date) VALUES (?, ?, ?, ?, ?, ?)", (city_id, city_name,state,event_name,event_genre,date))
+    c.execute("INSERT OR IGNORE INTO num_events (city_id, city_name,state,population,num_events) VALUES (?, ?, ?, ?, ?)", (city_id, city_name,state,population,num_events))
+
+    
     conn.commit()
     
 conn.close()
