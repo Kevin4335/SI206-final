@@ -18,6 +18,7 @@ def fetch_us_cities(num_cities):
     
     if response.status_code == 200:
         cities = response.json()["geonames"]
+        cities = [city for city in cities if city['population'] > 200000]
         return cities
     else:
         print("Failed to fetch cities. Status code:", response.status_code)

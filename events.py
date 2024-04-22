@@ -84,5 +84,15 @@ for city_data in cities_data:
 
     
     conn.commit()
+
+c.execute('SELECT * FROM events')
+rows = c.fetchall()
+for row in rows:
+    print(row)
+
+c.execute('SELECT * FROM num_events')
+rows = c.fetchall()
+for row in rows:
+    print(row)
     
 conn.close()
