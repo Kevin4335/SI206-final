@@ -15,7 +15,7 @@ for event_data in events_data:
     if event_genre in event_genres:
         event_genres[event_genre] = event_genres[event_genre] + 1
     else:
-        event_genres[event_genre] = 0
+        event_genres[event_genre] = 1
 genres = []
 num_genres = []
 for key, val in event_genres.items():
