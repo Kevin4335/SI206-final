@@ -5,6 +5,26 @@ import sqlite3
 #///////////////////////////////////////////////////////////////////////////
 conn = sqlite3.connect('cities.db')
 c = conn.cursor()
+
+c.execute('''
+    CREATE TABLE IF NOT EXISTS num_events 
+    (
+        city_id INTEGER PRIMARY KEY,
+        city_name TEXT,
+        state TEXT,
+        population TEXT,
+        num_events TEXT
+    )
+''')
+
+c.execute('''
+    INSERT OR IGNORE INTO num_events (city_id, city_name, state, population, num_events)
+    SELECT cities.id, cities.name, cities.state, cities.population, events.num_events
+    FROM cities
+    INNER JOIN events ON cities.id = events.city_id
+''')
+
+conn.commit()
 c.execute("SELECT * FROM num_events")
 events_data = c.fetchall()
 c.close()
