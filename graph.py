@@ -77,9 +77,13 @@ for event_data in events_data:
 
 baskets = []
 values = []
+f = open("baskets_averages.txt", "w")
 for key, val in pop_baskets.items():
     baskets.append(key)
+
     values.append(val[1]/val[0])
+    f.write(key+": " +str(val[1]/val[0]) + "\n")
+f.close()
     
 plt.figure(figsize=(10, 6))
 plt.bar(baskets, values, color='green')
