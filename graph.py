@@ -1,39 +1,83 @@
 import matplotlib.pyplot as plt
 import sqlite3
-
 #///////////////////////////////////////////////////////////////////////////
-# Create a pychart of genres of top events in 100 cities
+# Graph1 : Bar Chart of populations vs Average num of events
 #///////////////////////////////////////////////////////////////////////////
 conn = sqlite3.connect('cities.db')
 c = conn.cursor()
-c.execute("SELECT * FROM events")
+c.execute("SELECT * FROM num_events")
 events_data = c.fetchall()
-
-event_genres = {}
+c.close()
+pop_baskets = {
+    "200k-300k": (0, 0),
+    "300k-400k": (0, 0),
+    "400k-500k": (0, 0),
+    "500k-600k": (0, 0),
+    "600k-700k": (0, 0),
+    "700k-800k": (0, 0),
+    ">800k": (0, 0),
+}
+pops = []
+events = []
+names = []
 for event_data in events_data:
-    city_id, city_name, state, event_name, event_genre, date = event_data
-    if event_genre in event_genres:
-        event_genres[event_genre] = event_genres[event_genre] + 1
+    city_id, city_name, state, population, num_events = event_data
+    population = int(population)
+    num_events = int(num_events)
+    
+    
+    #Las vegas is a big outlier in terms of population + num_events, so i removed it from the data
+    if city_name == "Las Vegas":
+        pass
     else:
-        event_genres[event_genre] = 1
-genres = []
-num_genres = []
-for key, val in event_genres.items():
-    if key == "N/A":
-        genres.append("No Events")
-    else:
-        genres.append(key)
-    num_genres.append(val)
+        pops.append(population)
+        events.append(num_events)
+        names.append(city_name)
+        if population > 200000 and population <= 300000:
+            init_tup = pop_baskets["200k-300k"]
+            pop_baskets["200k-300k"] = (init_tup[0]+1, init_tup[1]+num_events)
+        elif population > 300000 and population <= 400000:
+            init_tup = pop_baskets["300k-400k"]
+            pop_baskets["300k-400k"] = (init_tup[0]+1, init_tup[1]+num_events)
+        elif population > 400000 and population <= 500000:
+            init_tup = pop_baskets["400k-500k"]
+            pop_baskets["400k-500k"] = (init_tup[0]+1, init_tup[1]+num_events)
+        elif population > 500000 and population <= 600000:
+            init_tup = pop_baskets["500k-600k"]
+            pop_baskets["500k-600k"] = (init_tup[0]+1, init_tup[1]+num_events)
+        elif population > 600000 and population <= 700000:
+            init_tup = pop_baskets["600k-700k"]
+            pop_baskets["600k-700k"] = (init_tup[0]+1, init_tup[1]+num_events)
+        elif population > 700000 and population <= 800000:
+            init_tup = pop_baskets["700k-800k"]
+            pop_baskets["700k-800k"] = (init_tup[0]+1, init_tup[1]+num_events)
+        elif population > 800000:
+            init_tup = pop_baskets[">800k"]
+            pop_baskets[">800k"] = (init_tup[0]+1, init_tup[1]+num_events)
 
-plt.figure(figsize=(8, 6))
-plt.pie(num_genres, labels=genres, autopct='%1.1f%%', startangle=140)
-plt.title('Distribution of Genres of Top Events in 100 US Cities')
-plt.axis('equal')
+baskets = []
+values = []
+for key, val in pop_baskets.items():
+    baskets.append(key)
+    values.append(val[1]/val[0])
+    
+plt.figure(figsize=(10, 6))
+plt.bar(baskets, values, color='green')
+
+plt.xlabel('Population of City')
+plt.ylabel('Average Number of Events')
+plt.title('City Population and Average Number of Events')
+
+plt.grid(True)
 plt.show()
+
 
 #/////////////////////////////////////////////////////////////////
 # Graph2
 #/////////////////////////////////////////////////////////////////
+
+
+
 
 #/////////////////////////////////////////////////////////////////
 # Graph3
