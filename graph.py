@@ -97,12 +97,49 @@ plt.show()
 
 
 #/////////////////////////////////////////////////////////////////
-# Graph2
+# Graph2: pie chart of event genre distrtibution across different cities
 #/////////////////////////////////////////////////////////////////
 
 
+# You must select some data from all of the tables in your database and calculate
+# something from that data (20 points). You could calculate the count of how many items
+# occur on a particular day of the week or the average of the number of items per day.
+# ● You must do at least one database join to select your data for your calculations or
+# visualizations (20 points).
+# ● Write out the calculated data to a file as text (10 points)
 
+
+conn = sqlite3.connect('cities.db')
+cursor = conn.cursor()
+
+cursor.execute("SELECT city_name, temperature FROM weather")
+temperature_data = cursor.fetchall()
+
+cities = []
+temp_c = []
+temp_f = []
+for data in temperature_data:
+    cities.append(data[0])
+    temp_c.append(data[1])
+    farenheit = (data[1] * 9/5) + 32
+    temp_f.append(farenheit)
+
+with open('temperature_data.txt', 'w') as file:
+    file.write('City\tTemperature (F)\n')
+    for i in range(0,len(cities)):
+        file.write(f'{cities[i]}\t{temp_f[i]}\n')
+
+plt.figure(figsize=(10, 6))
+plt.bar(cities, temp_f, color='skyblue')
+plt.xlabel('City')
+plt.ylabel('Temperature (F)')
+plt.title('Temperature Across Cities')
+plt.xticks(rotation=45, ha='right', fontsize = 10)  
+plt.tight_layout()  
+plt.show()
+
+conn.close()
 
 #/////////////////////////////////////////////////////////////////
-# Graph3
+# Graph3: 
 #/////////////////////////////////////////////////////////////////
