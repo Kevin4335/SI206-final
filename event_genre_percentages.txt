@@ -1,0 +1,5 @@
+Event Genre	Percentage
+Arts & Theatre	7.06%
+Miscellaneous	2.35%
+Music	58.82%
+Sports	31.76%

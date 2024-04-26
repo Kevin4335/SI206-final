@@ -152,5 +152,49 @@ plt.show()
 conn.close()
 
 #/////////////////////////////////////////////////////////////////
-# Graph3: 
+# Graph3: pie chart to show distribution of event genres across different cities
+
 #/////////////////////////////////////////////////////////////////
+
+conn = sqlite3.connect('cities.db')
+cursor = conn.cursor()
+
+cursor.execute("""
+    SELECT event_genre, COUNT(*) AS genre_count
+    FROM events
+    GROUP BY event_genre
+""")
+genre_data = cursor.fetchall()
+
+genres = []
+counts = []
+for data in genre_data:
+    # ignore events that don't have an event genre (don't want this to affect pie)
+    if data[0] == "N/A": 
+        continue
+    else:
+        genres.append(data[0])
+        counts.append(data[1])
+
+
+total_events = 0
+for count in counts:
+    total_events += count
+
+percentages = []
+for count in counts:
+    percent = (count / total_events) * 100
+    percentages.append(percent)
+
+with open('event_genre_percentages.txt', 'w') as file:
+    file.write('Event Genre\tPercentage\n')
+    for genre, percentage in zip(genres, percentages):
+        file.write(f'{genre}\t{percentage:.2f}%\n')
+
+plt.figure(figsize=(8, 8))
+plt.pie(percentages, labels=genres, autopct='%1.1f%%', startangle=140)
+plt.title('Percentage of Event Genres Across All Cities')
+plt.axis('equal') 
+plt.show()
+conn.close()
+
