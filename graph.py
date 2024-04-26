@@ -97,7 +97,7 @@ plt.show()
 
 
 #/////////////////////////////////////////////////////////////////
-# Graph2: pie chart of event genre distrtibution across different cities
+# Graph2: temperature across cities
 #/////////////////////////////////////////////////////////////////
 
 
@@ -129,14 +129,25 @@ with open('temperature_data.txt', 'w') as file:
     for i in range(0,len(cities)):
         file.write(f'{cities[i]}\t{temp_f[i]}\n')
 
-plt.figure(figsize=(10, 6))
-plt.bar(cities, temp_f, color='skyblue')
+# plt.figure(figsize=(10, 6))
+# plt.bar(cities, temp_f, color='skyblue')
+# plt.xlabel('City')
+# plt.ylabel('Temperature (F)')
+# plt.title('Temperature Across Cities')
+# plt.xticks(rotation=45, ha='right', fontsize = 10)  
+# plt.tight_layout()  
+# plt.show()
+
+
+plt.figure(figsize=(12, 6))  
+plt.bar(cities, temp_f, color='skyblue', width=0.6)  
 plt.xlabel('City')
 plt.ylabel('Temperature (F)')
 plt.title('Temperature Across Cities')
-plt.xticks(rotation=45, ha='right', fontsize = 10)  
+plt.xticks(rotation=45, ha='right', fontsize=8)
 plt.tight_layout()  
 plt.show()
+
 
 conn.close()
 

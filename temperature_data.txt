@@ -1,0 +1,101 @@
+City	Temperature (F)
+Des Moines	37.4
+Rochester	37.94
+Maryvale	77.18
+Tacoma	50.0
+Arlington	42.980000000000004
+Oxnard	57.92
+Columbus	48.02
+Worcester	35.96
+Moreno Valley	60.440000000000005
+Fayetteville	49.82
+Huntington Beach	59.18
+Yonkers	41.0
+Glendale	60.08
+Aurora	42.980000000000004
+Montgomery	51.08
+Scottsdale	80.06
+Irving	55.04
+Chesapeake	48.92
+North Las Vegas	77.18
+Fremont	62.6
+Baton Rouge	53.96
+Richmond	42.08
+Lexington	35.06
+Paradise	78.08
+Jamaica	46.94
+San Bernardino	57.02
+Huntsville	42.8
+Spokane	44.06
+Fontana	60.440000000000005
+Birmingham	46.04
+Modesto	64.94
+Omaha	42.08
+Kansas City	46.94
+Long Beach	59.18
+Mesa	78.98
+Staten Island	44.96
+Atlanta	48.92
+Colorado Springs	33.8
+Virginia Beach	50.0
+Raleigh	46.4
+Miami	75.02
+Oakland	57.92
+Tulsa	44.96
+Minneapolis	48.92
+Wichita	45.68
+New Orleans	60.980000000000004
+Cleveland	44.06
+Tampa	73.4
+Bakersfield	71.06
+Honolulu	73.4
+Anaheim	59.18
+West Raleigh	46.4
+Santa Ana	59.18
+Corpus Christi	64.04
+Indianapolis	42.980000000000004
+Charlotte	46.4
+San Francisco	57.92
+Seattle	50.0
+Denver	48.92
+Washington	42.980000000000004
+Nashville	42.980000000000004
+El Paso	55.04
+Oklahoma City	42.980000000000004
+Detroit	44.96
+Boston	41.0
+Portland	50.0
+New South Memphis	46.94
+Memphis	46.94
+Las Vegas	78.08
+Milwaukee	41.0
+Baltimore	42.08
+South Boston	41.0
+Albuquerque	57.92
+Tucson	72.86
+Fresno	73.04
+Sacramento	64.94
+Saint Paul	42.980000000000004
+Plano	51.26
+Newark	44.96
+Toledo	35.96
+Lincoln	41.9
+Chula Vista	73.4
+Jersey City	44.96
+Chandler	69.8
+Fort Wayne	37.04
+Buffalo	35.96
+Durham	42.8
+St. Petersburg	39.2
+Irvine	59.18
+Laredo	60.980000000000004
+Lubbock	46.94
+Madison	37.94
+Gilbert	69.8
+Norfolk	48.92
+Tri-Cities	82.4
+Louisville	44.06
+Reno	64.04
+Winston-Salem	44.96
+Hialeah	75.02
+Garland	51.98
