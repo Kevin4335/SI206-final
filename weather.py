@@ -2,6 +2,17 @@ import sqlite3
 import requests
 
 def fetch_weather(city_name, state_code):
+    """
+    Fetches current weather data for a given city and state from the WeatherAPI.
+
+    Args:
+    - city_name (str): The name of the city.
+    - state_code (str): The state code of the city.
+
+    Returns:
+    - dict: A dictionary containing weather information (temperature, condition, wind speed).
+    """
+
     url = "http://api.weatherapi.com/v1/current.json"
     params = {
         "key": "8fca84ca1eeb4364a59221439242004",
@@ -14,6 +25,17 @@ def fetch_weather(city_name, state_code):
         return None
 
 def fetch_astro(city_name, state_code):
+    """
+    Fetches astronomical data (sunrise and sunset times) for a given city and state from the WeatherAPI.
+
+    Args:
+    - city_name (str): The name of the city.
+    - state_code (str): The state code of the city.
+
+    Returns:
+    - dict: A dictionary containing astronomical information (sunrise, sunset).
+    """
+
     url = "http://api.weatherapi.com/v1/astronomy.json"
     params = {
         "key": "8fca84ca1eeb4364a59221439242004",
@@ -53,6 +75,15 @@ c.execute("SELECT COUNT(*) FROM astro")
 num_rows2 = c.fetchone()[0]
 
 def get_weather_data(cities_data):
+    """
+    Fetches weather data for multiple cities and inserts it into the weather table in the database.
+
+    Args:
+    - cities_data (list): A list of tuples containing city data (city_id, city_name, state, population).
+
+    Returns:
+    - None
+    """
     for city_data in cities_data:
             city_id, city_name, state, population = city_data
             weather_info = fetch_weather(city_name, state)
@@ -64,6 +95,16 @@ def get_weather_data(cities_data):
                         (city_id, city_name, state, population, temperature, condition, wind_speed))
 
 def get_times_data(cities_data):
+    """
+    Fetches astronomical data for multiple cities and inserts it into the astro table in the database.
+
+    Args:
+    - cities_data (list): A list of tuples containing city data (city_id, city_name, state, population).
+
+    Returns:
+    - None
+    """
+
     for city_data in cities_data:
             city_id, city_name, state, population = city_data
             astro_info = fetch_astro(city_name, state)
