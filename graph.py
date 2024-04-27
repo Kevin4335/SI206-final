@@ -198,3 +198,51 @@ plt.axis('equal')
 plt.show()
 conn.close()
 
+#/////////////////////////////////////////////////////////////////
+# Graph4: average temperatures of the different states (fahrenheit)
+#/////////////////////////////////////////////////////////////////
+
+conn = sqlite3.connect('cities.db')
+cursor = conn.cursor()
+
+cursor.execute("""
+    SELECT state, temperature
+    FROM weather
+""")
+temperature_data = cursor.fetchall()
+
+state_temps = {}
+# state, [temp, temp, temp, ...]
+
+temps = []
+for state, temp in temperature_data:
+    temp_f = (temp * 9/5) + 32
+    if state not in state_temps:
+        state_temps[state] = [temp_f]
+    else:
+        state_temps[state].append(temp_f)
+
+avg_state_temps = {}
+for state, temp_list in state_temps.items():
+    avg_temp = sum(temp_list) / len(temp_list)
+    avg_state_temps[state] = avg_temp
+
+states = list(avg_state_temps.keys())
+avg_temps = list(avg_state_temps.values())
+
+
+with open('avg_state_temp_data.txt', 'w') as file:
+    file.write('State\tAverage Temperature (F)\n')
+    for k,v in avg_state_temps.items():
+        file.write(f'{k}\t{v}\n')
+
+plt.figure(figsize=(10, 6))
+plt.bar(states, avg_temps, color='orange')
+plt.xlabel('State')
+plt.ylabel('Average Temperature (Fahrenheit)')
+plt.title('Average Temperatures of Different States')
+plt.xticks(rotation=45, ha='right') 
+plt.tight_layout()  
+plt.show()
+
+conn.close()
