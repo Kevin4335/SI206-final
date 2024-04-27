@@ -78,6 +78,8 @@ for event_data in events_data:
 baskets = []
 values = []
 f = open("baskets_averages.txt", "w")
+f.write('Population Ranges\tAvg # of Events (F)\n')
+
 for key, val in pop_baskets.items():
     baskets.append(key)
 

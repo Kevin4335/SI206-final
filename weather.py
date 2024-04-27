@@ -106,7 +106,7 @@ def get_times_data(cities_data):
     """
 
     for city_data in cities_data:
-            city_id, city_name, state, population = city_data
+            city_id, city_name, state, _ = city_data
             astro_info = fetch_astro(city_name, state)
             if astro_info:
                 sunrise = astro_info["sunrise"]

@@ -1,3 +1,4 @@
+Population Ranges	Avg # of Events (F)
 200k-300k: 89.0909090909091
 300k-400k: 212.9
 400k-500k: 333.5
