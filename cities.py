@@ -3,6 +3,16 @@ import sqlite3
 import random
 
 def fetch_us_cities(num_cities):
+    """
+    Fetches US cities data from the GeoNames API.
+
+    Args:
+    - num_cities (int): The number of cities to fetch.
+
+    Returns:
+    - list: A list of dictionaries containing city data (name, state, population).
+    """
+
     url = "http://api.geonames.org/searchJSON"
     params = {
         "q": "US",
@@ -27,6 +37,7 @@ def fetch_us_cities(num_cities):
 conn = sqlite3.connect('cities.db')
 c = conn.cursor()
 
+# create cities table if it doesn't exist
 c.execute('''CREATE TABLE IF NOT EXISTS cities
              (id INTEGER PRIMARY KEY AUTOINCREMENT,
               name TEXT NOT NULL,

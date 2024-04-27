@@ -7,7 +7,17 @@ root_url = "https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey=
 
 
 def fetch_event(city_name, state_id):
-    
+    """
+    Fetches event data from the Ticketmaster API for a given city and state.
+
+    Args:
+    - city_name (str): The name of the city.
+    - state_id (str): The state code (e.g., "NY" for New York).
+
+    Returns:
+    - dict: A dictionary containing event data obtained from the API response.
+    """
+        
     params = {
         "city":city_name,
         "stateCode":state_id,
@@ -26,6 +36,7 @@ c = conn.cursor()
 c.execute("SELECT * FROM cities")
 cities_data = c.fetchall()
 
+# create events table if it doesn't exist
 c.execute('''CREATE TABLE IF NOT EXISTS events
              (city_id INTEGER PRIMARY KEY,
               city_name TEXT,
@@ -35,6 +46,7 @@ c.execute('''CREATE TABLE IF NOT EXISTS events
               num_events TEXT,
               date TEXT)''')
 
+# iter over cities data and get the events
 for city_data in cities_data:
     city_id, city_name, state, population = city_data
     event_data = fetch_event(city_name,state)
