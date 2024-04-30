@@ -45,9 +45,9 @@ c.execute('''CREATE TABLE IF NOT EXISTS cities
               population INTEGER NOT NULL)''')
 
 c.execute("SELECT COUNT(*) FROM cities")
-num_rows = c.fetchone()[0]
+num_rows = 0
 
-while num_rows < 100:
+while(num_rows < 25):
     cities = fetch_us_cities(25)
 
     for city in cities:
@@ -59,8 +59,10 @@ while num_rows < 100:
         existing_city = c.fetchone()
 
         if not existing_city:
-            c.execute("INSERT INTO cities (name, state, population) VALUES (?, ?, ?)", (name, state, population))
             num_rows += 1
+            c.execute("INSERT INTO cities (name, state, population) VALUES (?, ?, ?)", (name, state, population))
+        if(num_rows == 25):
+            break
 
 
 c.execute('SELECT * FROM cities')

@@ -114,17 +114,8 @@ def get_times_data(cities_data):
                 c.execute("INSERT OR IGNORE INTO astro (city_id, city_name, sunrise, sunset) VALUES (?, ?, ?, ?)",
                         (city_id, city_name, sunrise, sunset))
 
-while num_rows < 100:
-    lim = min(num_rows+25, len(cities_data))
-    get_weather_data(cities_data[num_rows:lim])
-    num_rows += 25
-    lim = min(num_rows+25, len(cities_data))
-
-while num_rows2 < 100:
-    lim = min(num_rows2+25, len(cities_data))
-    get_times_data(cities_data[num_rows2:lim])
-    num_rows2 += 25
-    lim = min(num_rows2+25, len(cities_data))
+get_weather_data(cities_data)
+get_times_data(cities_data)
 
 c.execute('SELECT * FROM weather')
 rows = c.fetchall()
